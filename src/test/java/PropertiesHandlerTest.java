@@ -1,3 +1,6 @@
+import BusinessLogic.LocalTextfileHandler;
+import BusinessLogic.RandomString;
+import BusinessLogic.TempDB;
 import org.junit.Test;
 
 import java.io.FileInputStream;
@@ -22,7 +25,7 @@ public final class PropertiesHandlerTest {
         tempDB.setPort(50);
         assertNotNull(tempDB);
 
-        final PropertiesHandler propertiesHandler = new PropertiesHandler();
+        final LocalTextfileHandler propertiesHandler = new LocalTextfileHandler();
         final Properties properties = propertiesHandler.newConfig(tempDB);
 
         assertNotNull(properties);

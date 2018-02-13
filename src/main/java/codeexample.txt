@@ -1,0 +1,31 @@
+public void executePostScript(Session session) throws InterruptedException, JSchException, IOException {
+        List<String> postScript = new ArrayList<>(config.getStringList("PostScript"));
+        postScript.add("echo starting hard coded script");
+        postScript.add("echo " + name + " > cloud-id.txt");
+        postScript.add("echo " + ipAddress + " > cloud-bungee-ip.txt");
+        postScript.add("echo " + serverId + " > server-provider.id");
+        postScript.add("echo created files");
+        postScript.add("cp templates/cloudDaemon.sh cloudDaemon.sh");
+        postScript.add("echo copied cloudDaemon.sh");
+        postScript.add("chmod +x cloudDaemon.sh");
+        postScript.add("echo starting daemon!");
+        postScript.add("echo started everything");
+        postScript.add("./cloudDaemon.sh");
+        postScript.add("echo " + CLOUD_SYSTEM_SETUP_FINISHED);
+        executeScript(session, postScript);
+    }
+
+    public static void executeScript(Session session, List<String> script) throws JSchException, IOException, InterruptedException {
+        ChannelExec executionChannel = (ChannelExec) session.openChannel("exec");
+        executionChannel.setPty(false);
+        String singleLine = Joiner.on(";").join(script);
+        executionChannel.setCommand(singleLine);
+        executionChannel.connect();
+        AtomicBoolean waitingForFinish = new AtomicBoolean(true);
+        readInThread(executionChannel.getInputStream(), waitingForFinish, CLOUD_SYSTEM_SETUP_FINISHED);
+        readInThread(executionChannel.getExtInputStream(), waitingForFinish, CLOUD_SYSTEM_SETUP_FINISHED);
+        readInThread(executionChannel.getErrStream(), waitingForFinish, CLOUD_SYSTEM_SETUP_FINISHED);
+        while (waitingForFinish.get()) {
+            Thread.sleep(100);
+        }
+    }

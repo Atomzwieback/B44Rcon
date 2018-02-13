@@ -1,3 +1,8 @@
+import BusinessLogic.CommandHandler;
+import BusinessLogic.InstallCommand;
+import BusinessLogic.LocalTextfileHandler;
+import BusinessLogic.TempDB;
+
 import java.util.Scanner;
 
 
@@ -28,7 +33,6 @@ public class B44Rcon {
         Scanner cscanner = new Scanner(System.in);
         CommandHandler cmdh = new CommandHandler();
         LocalTextfileHandler newHost = new LocalTextfileHandler();
-        PropertiesHandler newHost2 = new PropertiesHandler();
         int choice = cscanner.nextInt();
 
         switch (choice){
@@ -39,14 +43,19 @@ public class B44Rcon {
                 tempdb.setHost(cscanner.next());
                 System.out.println("IP:");
                 tempdb.setIp(cscanner.next());
-                System.out.println("Port:");
-                tempdb.setPort(cscanner.nextInt());
+                try {
+                    System.out.println("Port:");
+                    tempdb.setPort(cscanner.nextInt());
+                } catch (Exception e) {
+                    System.out.println("Error: This is not a valid port.");
+                    System.exit(1);
+                }
                 System.out.println("User:");
                 tempdb.setUser(cscanner.next());
                 System.out.println("Passwort:");
                 tempdb.setPassword(cscanner.next());
                 cmd.setTempdb(tempdb);
-                newHost2.newConfig(tempdb);
+                newHost.newConfig(tempdb);
 //                newHost.newServer(tempdb);
                 break;
             case 2:

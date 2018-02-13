@@ -1,3 +1,5 @@
+package BusinessLogic;
+
 public class TempDB {
 
     private String command, ip, user, password, host;

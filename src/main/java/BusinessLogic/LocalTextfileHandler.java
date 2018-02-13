@@ -1,9 +1,11 @@
+package BusinessLogic;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Properties;
 
-public class PropertiesHandler {
+public class LocalTextfileHandler {
 
     public Properties newConfig(TempDB tempdb) {
 
@@ -30,7 +32,7 @@ public class PropertiesHandler {
                 try {
                     output.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("https://stackoverflow.com/search?q=[java]" + e.getMessage());
                 }
             }
 
