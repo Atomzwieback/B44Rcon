@@ -1,6 +1,5 @@
 package Frontend;
 
-import Midend.FXMLController;
 import Midend.Handler.AlertHandler;
 import Midend.Handler.LocalTextfileHandler;
 import Backend.TempDB;
@@ -13,7 +12,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Window;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
