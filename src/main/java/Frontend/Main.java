@@ -1,5 +1,7 @@
-package B44RconUI;
+package Frontend;
 
+import Midend.Handler.LocalTextfileHandler;
+import Midend.Handler.SSHCommandHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,6 +21,12 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 205, 646));
         primaryStage.setResizable(false);
         primaryStage.show();
+
+
+        SSHCommandHandler sshCommandHandler = new SSHCommandHandler();
+
+        sshCommandHandler.commandExecutor();
+
     }
 
 

@@ -1,11 +1,11 @@
-package BusinessLogic;
+package Midend.Handler;
 
 import javafx.scene.control.Alert;
 import javafx.stage.Window;
 
-public final class AlertHelper {
+public final class AlertHandler {
 
-    private AlertHelper() {}
+    private AlertHandler() {}
 
     public static void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);

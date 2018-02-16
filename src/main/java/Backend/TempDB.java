@@ -1,9 +1,11 @@
-package BusinessLogic;
+package Backend;
 
 public class TempDB {
 
-    private String command, ip, user, password, host;
+    private String command, ip, user, password;
+    private String host = "default";
     private int port;
+    public TempDB tempDB;
 
     // SETTER
     public void setCommand(String choosenCommand) {
@@ -28,6 +30,10 @@ public class TempDB {
 
     public void setPort(int choosenPort) {
         this.port = choosenPort;
+    }
+
+    public void setTempDB(TempDB tempDB) {
+        this.tempDB = tempDB;
     }
 
     // GETTER
@@ -57,4 +63,7 @@ public class TempDB {
         return this.port;
     }
 
+    public TempDB getTempDB() {
+        return tempDB;
+    }
 }

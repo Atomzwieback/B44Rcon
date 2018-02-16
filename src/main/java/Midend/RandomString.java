@@ -1,4 +1,4 @@
-package BusinessLogic;
+package Midend;
 
 import java.security.SecureRandom;
 import java.util.Locale;

@@ -1,6 +1,6 @@
-import BusinessLogic.LocalTextfileHandler;
-import BusinessLogic.RandomString;
-import BusinessLogic.TempDB;
+import Midend.Handler.LocalTextfileHandler;
+import Midend.RandomString;
+import Backend.TempDB;
 import org.junit.Test;
 
 import java.io.FileInputStream;
@@ -26,7 +26,7 @@ public final class PropertiesHandlerTest {
         assertNotNull(tempDB);
 
         final LocalTextfileHandler propertiesHandler = new LocalTextfileHandler();
-        final Properties properties = propertiesHandler.newConfig(tempDB);
+        final Properties properties = propertiesHandler.saveConfig(tempDB);
 
         assertNotNull(properties);
 

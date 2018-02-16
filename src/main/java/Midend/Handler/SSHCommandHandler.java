@@ -1,5 +1,6 @@
-package BusinessLogic;
+package Midend.Handler;
 
+import Backend.TempDB;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
@@ -11,33 +12,32 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-public class CommandHandler {
+public class SSHCommandHandler {
 
-    TempDB tempdb = new TempDB();
 
-    public void setTempdb(TempDB tempdb) {
-        this.tempdb = tempdb;
-    }
-
-    public void commandExecutor() {
+    public void commandExecutor(String command) {
         try {
             JSch jsch = new JSch();
-            Session session = jsch.getSession(tempdb.getUser(), tempdb.getIp(), tempdb.getPort());
+            LocalTextfileHandler localTextfileHandler = new LocalTextfileHandler();
+            Session session = jsch.getSession(
+                    localTextfileHandler.loadConfig().getProperty("user"),
+                    localTextfileHandler.loadConfig().getProperty("ip"),
+                    Integer.parseInt(localTextfileHandler.loadConfig().getProperty("port")));
             Properties config = new Properties();
             config.put("StrictHostKeyChecking", "no");
             session.setConfig(config);
-            session.setPassword(tempdb.getPassword());
+            session.setPassword(localTextfileHandler.loadConfig().getProperty("password"));
             session.connect();
 
             Channel channel = session.openChannel("exec");
-            ((ChannelExec) channel).setCommand(tempdb.getCommand());
+            ((ChannelExec) channel).setCommand(command);
             channel.setInputStream(null);
             ((ChannelExec) channel).setErrStream(System.err);
 
             InputStream input = channel.getInputStream();
             channel.connect();
 
-            System.out.println("Channel Connected to machine " + tempdb.getIp() + " server with command: " + tempdb.getCommand());
+            System.out.println("Channel Connected to machine " + localTextfileHandler.loadConfig().getProperty("ip") + " server with command: " + command);
 
             try {
                 InputStreamReader inputReader = new InputStreamReader(input);
