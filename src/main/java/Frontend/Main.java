@@ -25,7 +25,7 @@ public class Main extends Application {
 
         SSHCommandHandler sshCommandHandler = new SSHCommandHandler();
 
-        sshCommandHandler.commandExecutor();
+//        sshCommandHandler.commandExecutor();
 
     }
 

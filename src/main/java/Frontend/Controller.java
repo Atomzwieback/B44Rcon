@@ -45,9 +45,17 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        LocalTextfileHandler localTextfileHandler = new LocalTextfileHandler();
+        TempDB tempDB = new TempDB();
+
+        tempDB.setIp("0.0.0.0");
+        tempDB.setPort(22);
+        tempDB.setUser("exampleUser");
+        tempDB.setPassword("test123");
+        localTextfileHandler.saveConfig(tempDB);
+
         try {
 
-            LocalTextfileHandler localTextfileHandler = new LocalTextfileHandler();
 
             ipUI.setText(localTextfileHandler.loadConfig().getProperty("ip"));
             portUI.setText(localTextfileHandler.loadConfig().getProperty("port"));

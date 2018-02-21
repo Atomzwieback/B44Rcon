@@ -31,6 +31,7 @@ public class LocalTextfileHandler {
 
             // save properties to project root folder
             prop.store(output, null);
+            output.close();
 
         } catch (IOException io) {
             io.printStackTrace();
@@ -46,6 +47,8 @@ public class LocalTextfileHandler {
         }
         return prop;
     }
+
+
 
 
     public Properties loadConfig() {
