@@ -4,7 +4,7 @@
 </p>
 
 <h1 align="center"> B44Rcon Tool</h1>
-<h3 align="center"> The project was discontinued due the lack of public interest in B44. </h3>
+<h6 align="center"> The project was discontinued at 11.09.2018 due the lack of public interest in B44. </h6>
 <div>
 <p>Version 1.0 [Release]</p>
 </div>
